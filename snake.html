@@ -34,18 +34,30 @@
         let treasure = null;
         let score = 0;
         let highScore = 0;
-        let speed = 100;
+        let speed = 200;
         let initialSpeed = speed;
 
         function drawSnake() {
-            snake.forEach((segment, index) => {
-                ctx.fillStyle = index === 0 ? '#ff4081' : '#fff';
-                ctx.shadowBlur = index === 0 ? 10 : 0;
-                ctx.shadowColor = '#ff4081';
-                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
-                ctx.shadowBlur = 0;
-            });
+    snake.forEach((segment, index) => {
+        ctx.fillStyle = index === 0 ? '#ff4081' : '#fff';
+        ctx.shadowBlur = index === 0 ? 10 : 0;
+        ctx.shadowColor = '#ff4081';
+        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize, gridSize);
+        ctx.shadowBlur = 0;
+
+        if (index === 0) {
+            ctx.fillStyle = '#000'; 
+            const eyeXOffset = gridSize / 4; 
+            const eyeYOffset = gridSize / 4;
+            ctx.beginPath();
+            ctx.arc(segment.x * gridSize + eyeXOffset, segment.y * gridSize + eyeYOffset, gridSize / 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(segment.x * gridSize + 3 * eyeXOffset, segment.y * gridSize + eyeYOffset, gridSize / 8, 0, Math.PI * 2);
+            ctx.fill();
         }
+    });
+}
 
         function moveSnake() {
             const head = { ...snake[0] };
@@ -96,7 +108,7 @@
         }
 
         function increaseSpeed() {
-            speed = Math.max(20, initialSpeed - Math.floor(score / 5) * 5);
+            speed = Math.max(50, initialSpeed - Math.floor(score / 5) * 5);
         }
 
         function updateScore() {

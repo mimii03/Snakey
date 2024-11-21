@@ -22,7 +22,7 @@ body {
 canvas {
     background-color: rgb(214, 112, 173);
     border: 1px solid #fff;
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     z-index: 1;
 }
 
